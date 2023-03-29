@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/home_menu"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_home_24"
+        android:title="Anasayfa" />
+    <item
+        android:id="@+id/services_menu"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_medical_services_24"
+        android:title="Servisler" />
+
+    <item
+        android:id="@+id/cart_menu"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_shopping_cart_24"
+        android:title="Sepetim" />
+
+    <item
+        android:id="@+id/pet_menu"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_pets_24"
+        android:title="Petlerim" />
+</menu>

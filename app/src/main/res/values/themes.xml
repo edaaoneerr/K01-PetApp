@@ -1,0 +1,17 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="Theme.PetCare" parent="Theme.MaterialComponents.DayNight.NoActionBar">        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/vetBlue</item>
+        <item name="colorPrimaryVariant">@color/vetGreen</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/vetGreen</item>
+        <item name="colorSecondaryVariant">@color/vetBlue</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">?attr/colorOnPrimary</item>
+        <!-- Customize your theme here. -->
+        <item name="android:fontFamily">@font/sf_pro</item>
+
+    </style>
+</resources>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_graph"
+    app:startDestination="@id/loginFragment">
+    <fragment
+        android:id="@+id/signUpFragment"
+        android:name="com.edaaoneerr.petcare.view.authview.SignUpFragment"
+        android:label="SignUpFragment">
+        <action
+            android:id="@+id/action_signUpFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_signUpFragment_to_homePageFragment"
+            app:destination="@id/home_menu" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.edaaoneerr.petcare.view.authview.LoginFragment"
+        android:label="LoginFragment">
+        <action
+            android:id="@+id/action_loginFragment_to_signUpFragment"
+            app:destination="@id/signUpFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_homePageFragment"
+            app:destination="@id/home_menu" />
+    </fragment>
+    <fragment
+        android:id="@+id/home_menu"
+        android:name="com.edaaoneerr.petcare.view.homepageview.HomePageFragment"
+        android:label="fragment_home_page"
+        tools:layout="@layout/fragment_home_page">
+        <action
+            android:id="@+id/action_homePageFragment_to_cartFragment"
+            app:destination="@id/cart_menu" />
+        <action
+            android:id="@+id/action_homePageFragment_to_profileFragment"
+            app:destination="@id/pet_menu" />
+        <action
+            android:id="@+id/action_homePageFragment_to_servicesFragment"
+            app:destination="@id/services_menu" />
+        <action
+            android:id="@+id/action_home_menu_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
+        <action
+            android:id="@+id/action_home_menu_to_messageFragment"
+            app:destination="@id/messageFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/vetListFragment"
+        android:name="com.edaaoneerr.petcare.view.vetview.VetListFragment"
+        android:label="VetListFragment">
+        <action
+            android:id="@+id/action_vetListFragment_to_servicesListFragment"
+            app:destination="@id/servicesListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/cart_menu"
+        android:name="com.edaaoneerr.petcare.view.cartview.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart" />
+    <fragment
+        android:id="@+id/pet_menu"
+        android:name="com.edaaoneerr.petcare.view.profileview.ProfileFragment"
+        android:label="fragment_pet"
+        tools:layout="@layout/fragment_pet" />
+    <fragment
+        android:id="@+id/services_menu"
+        android:name="com.edaaoneerr.petcare.view.servicesview.ServicesFragment"
+        android:label="fragment_services"
+        tools:layout="@layout/fragment_services">
+        <action
+            android:id="@+id/action_services_menu_to_servicesListFragment"
+            app:destination="@id/servicesListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.edaaoneerr.petcare.view.notificationview.NotificationFragment"
+        android:label="fragment_notification"
+        tools:layout="@layout/fragment_notification" />
+    <fragment
+        android:id="@+id/messageFragment"
+        android:name="com.edaaoneerr.petcare.view.messageview.MessageFragment"
+        android:label="MessageFragment" />
+    <fragment
+        android:id="@+id/servicesListFragment"
+        android:name="com.edaaoneerr.petcare.view.servicesview.ServicesListFragment"
+        android:label="fragment_services_list"
+        tools:layout="@layout/fragment_services_list">
+        <action
+            android:id="@+id/action_servicesListFragment_to_vetListFragment"
+            app:destination="@id/vetListFragment" />
+    </fragment>
+</navigation>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="arentYouAMemberText">Üye değil misiniz?</string>
+    <string name="phoneNumber">Telefon Numarası</string>
+    <string name="signUpNowText">Hemen Üye Ol</string>
+    <string name="orText">veya</string>
+    <string name="loginWithGoogleText">Google ile Giriş Yap</string>
+    <string name="optionalPhoneNumberText">Telefon Numarası (Opsiyonel)</string>
+    <string name="loginText">Giriş Yap</string>
+    <string name="signUpText">ÜYE OL</string>
+    <string name="alreadyAMemberText">Zaten üye misiniz?</string>
+    <string name="signUpWithGoogleText">Google ile Üye Ol</string>
+    <string name="emailText">E-posta</string>
+    <string name="passwordText">Şifre</string>
+    <string name="passwordAgainText">Şifre Tekrarı</string>
+</resources>
