@@ -10,10 +10,12 @@ import com.google.gson.JsonParser
 import kotlinx.coroutines.launch
 import org.mindrot.jbcrypt.BCrypt
 
+
 class LoginViewModel(application: Application) : BaseViewModel(application) {
 
     private val userAPIService = UserAPIService()
     var isAuthenticated = MutableLiveData<Boolean?>()
+    private val MY_PERMISSIONS_REQUEST_SEND_SMS = 1
 
     fun userControl(user: Users) {
         launch {
@@ -28,17 +30,20 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
                     isAuthenticated.value = true
                 } else {
                     if (phoneUser != null) {
-
                         isAuthenticated.value = true
+
                     }
                     isAuthenticated.value = false
                     Toast.makeText(getApplication(), "Yanlış şifre", Toast.LENGTH_LONG).show()
                 }
             } else {
-                isAuthenticated.value = false
-                Toast.makeText(getApplication(), "Böyle bir kullanıcı yok", Toast.LENGTH_LONG)
-                    .show()
-
+                if (phoneUser != null) {
+                    isAuthenticated.value = true
+                } else {
+                    isAuthenticated.value = false
+                    Toast.makeText(getApplication(), "Böyle bir kullanıcı yok", Toast.LENGTH_LONG)
+                        .show()
+                }
             }
         }
     }
@@ -55,4 +60,9 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
             throw Exception("Failed to get users")
         }
     }
+
 }
+
+
+
+

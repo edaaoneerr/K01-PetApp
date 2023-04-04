@@ -25,6 +25,13 @@
         <action
             android:id="@+id/action_loginFragment_to_homePageFragment"
             app:destination="@id/home_menu" />
+        <argument
+            android:name="userPhoneNumber"
+            android:defaultValue="0000000"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_loginFragment_to_OTPVerificationFragment"
+            app:destination="@id/OTPVerificationFragment" />
     </fragment>
     <fragment
         android:id="@+id/home_menu"
@@ -91,5 +98,13 @@
         <action
             android:id="@+id/action_servicesListFragment_to_vetListFragment"
             app:destination="@id/vetListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/OTPVerificationFragment"
+        android:name="com.edaaoneerr.petcare.view.otpverificationview.OTPVerificationFragment"
+        android:label="OTPVerificationFragment">
+        <action
+            android:id="@+id/action_OTPVerificationFragment_to_home_menu"
+            app:destination="@id/home_menu" />
     </fragment>
 </navigation>

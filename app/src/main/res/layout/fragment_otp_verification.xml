@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".view.otpview.OtpVerificationFragment">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.edaaoneerr.petcare.viewmodel.OTPVerificationViewModel" />
+    </data>
+
+    <FrameLayout
+        android:id="@+id/otp_verification_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:id="@+id/otp_verification_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center"
+                android:text="Telefon Numarası Doğrulama"
+                android:textColor="@color/black"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Lütfen doğrulama kodunu girin."
+                android:textColor="@color/black"
+                android:textSize="12sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp">
+
+                <com.kevinschildhorn.otpview.OTPView
+                    android:id="@+id/otpView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    app:otp_itemCount="6"
+                    app:otp_itemHeight="40dp"
+                    app:otp_itemWidth="35dp"
+                    app:otp_marginBetween="10dp"
+                    app:otp_underscoreCursor="false">
+
+                </com.kevinschildhorn.otpview.OTPView>
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/timerTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="10dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text='@{"Kalan süre: " + viewModel.countdown}'
+                android:textColor="@color/purple_700"
+                android:textSize="12sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/resendButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center"
+                    android:layout_marginVertical="10dp"
+                    android:layout_marginEnd="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_edge"
+                    android:backgroundTint="@color/white"
+                    android:text="Yeniden Gönder"
+                    android:textAllCaps="false"
+                    android:textColor="@color/vetBlue"
+                    android:textSize="12sp" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/verifyButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right|center"
+                    android:layout_marginStart="5dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_edge"
+                    android:text="Onayla"
+                    android:textAllCaps="false"
+                    android:textColor="@color/vetBlue"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</layout>

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="vet"
             type="com.edaaoneerr.petcare.model.Vet" />
@@ -75,8 +76,8 @@
             android:layout_gravity="bottom|right"
             android:layout_marginEnd="4dp"
             android:backgroundTint="@color/vetGreen"
-            android:text="Randevu Al"
             android:padding="1dp"
+            android:text="Randevu Al"
             android:textAllCaps="false"
             android:textSize="13sp"
             app:cornerRadius="5dp"
@@ -224,7 +225,7 @@
             android:layout_marginTop="14dp"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/clinic"
+            android:src="@drawable/vet"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

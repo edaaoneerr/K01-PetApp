@@ -13,4 +13,6 @@
     <string name="emailText">E-posta</string>
     <string name="passwordText">Şifre</string>
     <string name="passwordAgainText">Şifre Tekrarı</string>
+    <string name="resend_otp">Yeniden Gönder</string>
+    <string name="resend_otp_timer">Kalan süre:</string>
 </resources>

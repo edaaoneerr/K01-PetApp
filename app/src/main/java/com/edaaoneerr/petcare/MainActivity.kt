@@ -1,8 +1,16 @@
 package com.edaaoneerr.petcare
 
+import android.content.ContentValues.TAG
+import android.content.IntentFilter
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.view.View
+import android.widget.Toast
+import androidx.activity.viewModels
+import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.NavController
@@ -11,18 +19,45 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.edaaoneerr.petcare.databinding.ActivityMainBinding
+import com.edaaoneerr.petcare.viewmodel.OTPVerificationViewModel
+import com.google.android.gms.auth.api.phone.SmsRetriever
+import com.google.android.gms.tasks.OnSuccessListener
+import com.google.android.gms.tasks.Task
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
+
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
+    private lateinit var alertDialog: AlertDialog
+    private val otpViewModel: OTPVerificationViewModel by viewModels()
 
+    @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
+
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+        try {
+            val smsReceiver = SmsReceiver()
+            val filter = IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION)
+            applicationContext.registerReceiver(smsReceiver, filter)
+            val client = SmsRetriever.getClient(applicationContext)
+            val task: Task<Void> = client.startSmsRetriever()
+            task.addOnSuccessListener(OnSuccessListener<Void?> {
+                Toast.makeText(
+                    this@MainActivity,
+                    "Text",
+                    Toast.LENGTH_SHORT
+                ).show()
+            })
+        } catch (e: Exception) {
+            Log.e(TAG, e.toString())
+        }
+
 
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
@@ -91,7 +126,6 @@ class MainActivity : AppCompatActivity() {
 
 
     }
-
 
     private fun setupBottomNavMenu(navController: NavController) {
         val bottomNav = findViewById<BottomNavigationView>(R.id.bottom_navigation)
