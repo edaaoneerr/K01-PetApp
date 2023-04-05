@@ -12,7 +12,7 @@
     </data>
 
     <FrameLayout
-        android:id="@+id/otp_verification_container"
+        android:id="@+id/otpVerificationContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -32,7 +32,7 @@
                 android:layout_marginBottom="10dp"
                 android:gravity="center"
                 android:text="Telefon Numarası Doğrulama"
-                android:textColor="@color/black"
+                android:textColor="@color/vetBlue"
                 android:textSize="15sp"
                 android:textStyle="bold" />
 
@@ -41,39 +41,40 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="Lütfen doğrulama kodunu girin."
-                android:textColor="@color/black"
+                android:textColor="@color/vetGreen"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/timerTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text='@{viewModel.countdown}'
+                android:textColor="@color/vetGreen"
                 android:textSize="12sp" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="20dp">
+                android:layout_marginVertical="10dp">
 
                 <com.kevinschildhorn.otpview.OTPView
                     android:id="@+id/otpView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="number"
+                    app:otp_backgroundImage="@drawable/otp_shape"
                     app:otp_itemCount="6"
                     app:otp_itemHeight="40dp"
-                    app:otp_itemWidth="35dp"
+                    app:otp_itemWidth="40dp"
                     app:otp_marginBetween="10dp"
-                    app:otp_underscoreCursor="false">
+                    app:otp_underscoreCursor="true">
 
                 </com.kevinschildhorn.otpview.OTPView>
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/timerTextView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="10dp"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:text='@{"Kalan süre: " + viewModel.countdown}'
-                android:textColor="@color/purple_700"
-                android:textSize="12sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -92,7 +93,7 @@
                     android:backgroundTint="@color/white"
                     android:text="Yeniden Gönder"
                     android:textAllCaps="false"
-                    android:textColor="@color/vetBlue"
+                    android:textColor="@color/vetGreen"
                     android:textSize="12sp" />
 
                 <androidx.appcompat.widget.AppCompatButton
@@ -105,7 +106,7 @@
                     android:background="@drawable/rounded_edge"
                     android:text="Onayla"
                     android:textAllCaps="false"
-                    android:textColor="@color/vetBlue"
+                    android:textColor="@color/vetGreen"
                     android:textSize="12sp" />
             </LinearLayout>
 

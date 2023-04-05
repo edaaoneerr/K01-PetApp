@@ -14,42 +14,50 @@ import org.mindrot.jbcrypt.BCrypt
 class LoginViewModel(application: Application) : BaseViewModel(application) {
 
     private val userAPIService = UserAPIService()
-    var isAuthenticated = MutableLiveData<Boolean?>()
-    private val MY_PERMISSIONS_REQUEST_SEND_SMS = 1
+    val authenticationResult = MutableLiveData<AuthenticationResult>()
 
-    fun userControl(user: Users) {
+
+    fun authenticateUser(user: Users) {
         launch {
             val users = getUsers()
             val matchingUser = users.find { it.userEmail == user.userEmail }
+
             val phoneUser = users.find { it.userPhoneNumber == user.userPhoneNumber }
 
-            if (matchingUser != null) {
-                val passwordMatches = BCrypt.checkpw(user.userPassword, matchingUser.userPassword)
-
-                if (passwordMatches) {
-                    isAuthenticated.value = true
+            if (matchingUser != null && phoneUser == null) {
+                if (BCrypt.checkpw(
+                        user.userPassword,
+                        matchingUser.userPassword
+                    )
+                ) {
+                    authenticationResult.value = AuthenticationResult.EMAIL_AUTHENTICATED
                 } else {
-                    if (phoneUser != null) {
-                        isAuthenticated.value = true
-
-                    }
-                    isAuthenticated.value = false
-                    Toast.makeText(getApplication(), "Yanlış şifre", Toast.LENGTH_LONG).show()
+                    authenticationResult.value = AuthenticationResult.INVALID_CREDENTIALS
                 }
+            } else if (phoneUser != null && matchingUser == null) {
+                authenticationResult.value = AuthenticationResult.PHONE_AUTHENTICATED
+
+            } else if (matchingUser != null && phoneUser != null) {
+                if (BCrypt.checkpw(
+                        user.userPassword,
+                        matchingUser.userPassword
+                    )
+                ) {
+                    authenticationResult.value = AuthenticationResult.FULLY_AUTHENTICATED
+                } else {
+                    authenticationResult.value = AuthenticationResult.INVALID_CREDENTIALS
+                }
+
             } else {
-                if (phoneUser != null) {
-                    isAuthenticated.value = true
-                } else {
-                    isAuthenticated.value = false
-                    Toast.makeText(getApplication(), "Böyle bir kullanıcı yok", Toast.LENGTH_LONG)
-                        .show()
-                }
+                authenticationResult.value = AuthenticationResult.NOT_AUTHENTICATED
+                Toast.makeText(getApplication(), "Böyle bir kullanıcı yok.", Toast.LENGTH_LONG)
+                    .show()
             }
+
         }
     }
 
-
-    suspend fun getUsers(): List<Users> {
+    private suspend fun getUsers(): List<Users> {
         val response = userAPIService.getUsers()
 
         if (response.isSuccessful) {
@@ -61,6 +69,15 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
         }
     }
 
+
+}
+
+enum class AuthenticationResult {
+    PHONE_AUTHENTICATED,
+    EMAIL_AUTHENTICATED,
+    FULLY_AUTHENTICATED,
+    INVALID_CREDENTIALS,
+    NOT_AUTHENTICATED
 }
 
 

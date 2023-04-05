@@ -8,7 +8,7 @@ import io.reactivex.annotations.NonNull
 import java.util.*
 
 @Entity
-data class Users (
+data class Users(
 
     @NonNull
     @PrimaryKey
@@ -69,6 +69,18 @@ data class Users (
         null,
         null,
         null,
+        userPhoneNumber,
+        null,
+        false
+    )
+
+    constructor(userEmail: String, userPassword: String, userPhoneNumber: String?) : this(
+        UUID.randomUUID(),
+        null,
+        null,
+        userPassword,
+        null,
+        userEmail,
         userPhoneNumber,
         null,
         false

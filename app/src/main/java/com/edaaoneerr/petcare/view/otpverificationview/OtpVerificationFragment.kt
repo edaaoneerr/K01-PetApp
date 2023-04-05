@@ -7,13 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavDirections
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.edaaoneerr.petcare.R
 import com.edaaoneerr.petcare.databinding.FragmentOtpVerificationBinding
+import com.edaaoneerr.petcare.util.navigate
+import com.edaaoneerr.petcare.view.authview.LoginFragmentDirections
+import com.edaaoneerr.petcare.viewmodel.OTPVerificationResult
 import com.edaaoneerr.petcare.viewmodel.OTPVerificationViewModel
 import com.kevinschildhorn.otpview.OTPView
 
@@ -28,55 +32,36 @@ class OTPVerificationFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentOtpVerificationBinding.inflate(inflater, container, false)
+        val navController = findNavController()
+        Navigation.setViewNavController(binding.otpVerificationContainer, navController)
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        otpViewModel.countdown.observe(viewLifecycleOwner) { count ->
-            if (count == 0) {
-                binding.resendButton.isEnabled = true
-                binding.verifyButton.isEnabled = false
-            } else {
-                binding.resendButton.isEnabled = false
-                binding.verifyButton.isEnabled = true
-                binding.timerTextView.text = count.toString()
-            }
-        }
-
-        otpViewModel.startCountdown()
-    }
-
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        binding = FragmentOtpVerificationBinding.inflate(layoutInflater)
 
+        binding = FragmentOtpVerificationBinding.inflate(layoutInflater)
         val builder = AlertDialog.Builder(requireActivity())
         val dialogView = layoutInflater.inflate(R.layout.fragment_otp_verification, null)
-
         val userPhoneNumber = arguments?.getString("userPhoneNumber")
-
+        otpViewModel.sendSMS(requireContext(), userPhoneNumber.toString())
 
         dialogView.findViewById<Button>(R.id.resendButton).setOnClickListener {
             otpViewModel.sendSMS(it.context, userPhoneNumber.toString())
+            otpViewModel.startCountdown()
         }
 
         dialogView.findViewById<Button>(R.id.verifyButton).setOnClickListener {
             val enteredOtp = dialogView.findViewById<OTPView>(R.id.otpView).getStringFromFields()
+            verifyOTP(enteredOtp)
+        }
 
-            if (otpViewModel.verifyOTP(
-                    it.context,
-                    userPhoneNumber.toString(),
-                    enteredOtp
-                )
-            ) {
-                Toast.makeText(requireContext(), "OTP VERIFIED", Toast.LENGTH_LONG).show()
-                val action =
-                    OTPVerificationFragmentDirections.actionOTPVerificationFragmentToHomeMenu()
-                navigate(action)
-                dismiss()
-            } else {
-                Toast.makeText(requireContext(), "TEKRAR DENEYİN", Toast.LENGTH_LONG).show()
+        otpViewModel.countdown.observe(this) { countdown ->
+            dialogView.findViewById<TextView>(R.id.timerTextView).text =
+                "Yeniden denemek için kalan süre: $countdown saniye"
+
+            if (otpViewModel.countdown.value == 0) {
+                otpViewModel.sendSMS(binding.root.context, userPhoneNumber.toString())
+                otpViewModel.startCountdown()
             }
         }
 
@@ -84,10 +69,22 @@ class OTPVerificationFragment : DialogFragment() {
 
     }
 
-    private fun navigate(destination: NavDirections) = with(findNavController()) {
-        currentDestination?.getAction(destination.actionId)
-            ?.let { navigate(destination) }
-    }
 
+    private fun verifyOTP(enteredOtp: String): Boolean {
+
+        if (otpViewModel.verificationCode.value == enteredOtp) {
+            otpViewModel.otpVerificationResult.value = OTPVerificationResult.OTP_VERIFIED
+
+            val action = LoginFragmentDirections.actionLoginFragmentToHomePageFragment()
+            navigate(binding.root, action)
+
+            dismiss()
+        } else {
+            otpViewModel.otpVerificationResult.value = OTPVerificationResult.INVALID_OTP
+            Toast.makeText(requireContext(), "TEKRAR DENEYİN", Toast.LENGTH_LONG).show()
+        }
+
+        return false
+    }
 
 }

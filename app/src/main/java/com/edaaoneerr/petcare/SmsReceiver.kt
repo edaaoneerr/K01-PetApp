@@ -1,31 +1,37 @@
 package com.edaaoneerr.petcare
 
 import android.content.BroadcastReceiver
-import android.content.ContentValues.TAG
 import android.content.Context
 import android.content.Intent
+import android.provider.Telephony
 import android.util.Log
-import com.google.android.gms.auth.api.phone.SmsRetriever
-import com.google.android.gms.common.api.CommonStatusCodes
-import com.google.android.gms.common.api.Status
 
 class SmsReceiver : BroadcastReceiver() {
+    private val TAG = "Sms"
+    private val SENDER_PHONE_NUMBER = "+905537020255"
+
     override fun onReceive(context: Context, intent: Intent) {
-        if (SmsRetriever.SMS_RETRIEVED_ACTION == intent.action) {
-            val extras = intent.extras
-            val status = extras?.get(SmsRetriever.EXTRA_STATUS) as Status
+        if (intent.action == Telephony.Sms.Intents.SMS_RECEIVED_ACTION) {
+            val smsMessages = Telephony.Sms.Intents.getMessagesFromIntent(intent)
 
-            when (status.statusCode) {
-                CommonStatusCodes.SUCCESS -> {
-                    val message = extras.get(SmsRetriever.EXTRA_SMS_MESSAGE) as String?
-                    Log.e(TAG, "onReceive: $message")
+            for (sms in smsMessages) {
+                val senderPhoneNumber = sms.originatingAddress
 
-                }
-                CommonStatusCodes.TIMEOUT -> {
-                    Log.e(TAG, "onReceive: failure");
+                if (senderPhoneNumber != null && !senderPhoneNumber.equals(SENDER_PHONE_NUMBER)) {
+                    // Process the SMS message
+                    Log.d(
+                        "SMSVERIFICATION",
+                        "SMS received from $senderPhoneNumber: ${sms.messageBody}"
+                    )
                 }
             }
         }
     }
+
 }
+
+
+
+
+
 

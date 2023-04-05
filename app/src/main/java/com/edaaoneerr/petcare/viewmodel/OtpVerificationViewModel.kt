@@ -5,15 +5,12 @@ import android.app.Activity
 import android.content.Context
 import android.content.pm.PackageManager
 import android.os.CountDownTimer
-import android.provider.Telephony
 import android.telephony.SmsManager
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import java.util.*
-import java.util.regex.Pattern
 
 class OTPVerificationViewModel : ViewModel() {
 
@@ -21,53 +18,14 @@ class OTPVerificationViewModel : ViewModel() {
     private val countdownInterval = 1000L // 1 second
     private val countdownDuration = 120000L // 2 minutes
     private var countdownSecondsRemaining = 0
-
-
+    val verificationCode = MutableLiveData<String?>()
     val countdown = MutableLiveData<Int>()
     val otpVerificationResult = MutableLiveData<OTPVerificationResult>()
 
 
-    fun verifyOTP(context: Context, phoneNumber: String, enteredOTP: String): Boolean {
-        val projection = arrayOf(Telephony.Sms.BODY)
-        val selection = "${Telephony.Sms.ADDRESS} = ?"
-        val selectionArgs = arrayOf(phoneNumber)
-        val sortOrder = "${Telephony.Sms.DATE} DESC"
-        val cursor = context.contentResolver.query(
-            Telephony.Sms.CONTENT_URI,
-            projection,
-            selection,
-            selectionArgs,
-            sortOrder
-        )
-
-        if (cursor != null && cursor.moveToFirst()) {
-
-            val columnIndex = cursor.getColumnIndex(Telephony.Sms.BODY)
-            if (columnIndex >= 0) {
-                val messageBody = cursor.getString(columnIndex)
-                if (messageBody != null) {
-                    val otpPattern = Pattern.compile("(\\d{6})")
-                    val otpMatcher = otpPattern.matcher(messageBody)
-                    if (otpMatcher.find()) {
-                        val receivedOTP = otpMatcher.group(1)
-                        otpVerificationResult.value = OTPVerificationResult.OTP_VERIFIED
-                        return enteredOTP == receivedOTP
-                    }
-                } else {
-
-                    Toast.makeText(context, "Wrong otp", Toast.LENGTH_LONG).show()
-                }
-
-            }
-            cursor.close()
-        }
-        otpVerificationResult.value = OTPVerificationResult.INVALID_OTP
-        return false
-    }
-
     private fun generateVerificationCode(): String {
         val random = Random()
-        val code = random.nextInt(999999 - 100000) + 100000
+        val code = random.nextInt(999999 - 100000) + 10000
         return code.toString()
     }
 
@@ -77,19 +35,26 @@ class OTPVerificationViewModel : ViewModel() {
                 Manifest.permission.SEND_SMS
             ) == PackageManager.PERMISSION_GRANTED
         ) {
+            _sendSMS(phoneNumber)
+            startCountdown()
 
-            val verificationCode = generateVerificationCode()
-
-            val message = "<#> Doğrulama kodunuz: $verificationCode gqaG5x7ynOQ"
-            val smsManager: SmsManager = SmsManager.getDefault()
-            smsManager.sendTextMessage(phoneNumber, null, message, null, null)
         } else {
             ActivityCompat.requestPermissions(
                 context as Activity,
                 arrayOf(Manifest.permission.SEND_SMS),
                 1
             )
+            // _sendSMS(phoneNumber)
         }
+
+    }
+
+    private fun _sendSMS(phoneNumber: String) {
+        verificationCode.value = generateVerificationCode()
+        val message = "<#> Doğrulama kodunuz: ${verificationCode.value} gqaG5x7ynOQ"
+        val smsManager: SmsManager = SmsManager.getDefault()
+        smsManager.sendTextMessage(phoneNumber, null, message, null, null)
+
     }
 
 
@@ -99,14 +64,19 @@ class OTPVerificationViewModel : ViewModel() {
             override fun onTick(millisUntilFinished: Long) {
                 countdownSecondsRemaining--
                 countdown.value = countdownSecondsRemaining
+                if (countdown.value == 0) {
+                    countdownTimer?.cancel()
+                }
             }
 
             override fun onFinish() {
+                // reset verification code to null or generate a new code
+                verificationCode.value = null
+                // verificationCode.value = generateVerificationCode()
                 countdown.value = 0
             }
         }.start()
     }
-
 
     override fun onCleared() {
         countdownTimer?.cancel()

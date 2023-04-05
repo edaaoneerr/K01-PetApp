@@ -1,8 +1,11 @@
 package com.edaaoneerr.petcare.util
 
 import android.content.Context
+import android.view.View
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
+import androidx.navigation.NavDirections
+import androidx.navigation.Navigation
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
@@ -29,6 +32,10 @@ fun placeholderYap(context: Context): CircularProgressDrawable {
 
     }
 
+}
+
+fun navigate(view: View, action: NavDirections) {
+    Navigation.findNavController(view).navigate(action)
 }
 
 
