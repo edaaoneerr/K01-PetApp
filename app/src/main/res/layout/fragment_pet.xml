@@ -1,14 +1,303 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.petview.PetFragment">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        tools:context=".view.petview.PetFragment">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                app:cardCornerRadius="10dp">
+
+                <ImageView
+                    android:id="@+id/roundedImageView"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:background="@color/white"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/cute_vet" />
+
+            </androidx.cardview.widget.CardView>
+
+
+            <LinearLayout
+                android:id="@+id/linearLayout5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="20dp"
+                android:orientation="vertical"
+
+                >
+
+                <EditText
+                    android:id="@+id/pet_name_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    android:layout_marginBottom="5dp"
+                    android:hint="Evcil Hayvan İsmi"
+                    android:inputType="text"
+                    android:minHeight="10dp"
+                    android:minLines="1"
+                    android:paddingTop="5dp"
+                    android:textSize="12sp"
+
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.791"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_editor_absoluteY="73dp" />
+
+
+                <Spinner
+                    android:id="@+id/animalType"
+                    android:layout_width="match_parent"
+                    android:layout_height="28dp"
+                    android:layout_marginBottom="5dp"
+                    android:entries="@array/petType"
+                    android:prompt="@array/petType" />
+
+                <Spinner
+                    android:id="@+id/petBreed"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:entries="@array/petType"
+                    android:prompt="@array/petType" />
+
+                <EditText
+                    android:id="@+id/pet_age_edit_text"
+                    android:layout_width="181dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:hint="Evcil Hayvan Yaşı"
+                    android:inputType="text"
+                    android:minHeight="10dp"
+                    android:minLines="1"
+                    android:paddingTop="5dp"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.791"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_editor_absoluteY="73dp" />
+
+                <EditText
+                    android:id="@+id/pet_allergies_text"
+                    android:layout_width="181dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:hint="Alerjen Bilgileri"
+                    android:inputType="text"
+                    android:minHeight="10dp"
+                    android:minLines="1"
+                    android:paddingTop="5dp"
+                    android:textSize="12sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.791"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:layout_editor_absoluteY="73dp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="25dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="İlaçlar:"
+                tools:layout_editor_absoluteX="19dp"
+                tools:layout_editor_absoluteY="296dp" />
+
+            <EditText
+                android:id="@+id/pet_allergies_edit_text4"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:background="@drawable/pet_text_bg"
+                android:hint="Evcil hayvanınızın kullandığı ilaç veya ilaçları varsa yazınız."
+                android:inputType="textMultiLine"
+                android:lines="3"
+                android:paddingHorizontal="15dp"
+                android:textSize="12sp"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="334dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Hastalıklar:" />
+
+            <EditText
+                android:id="@+id/pet_allergies_edit_text2"
+                android:layout_width="match_parent"
+                android:layout_height="44dp"
+                android:background="@drawable/pet_text_bg"
+                android:hint="Evcil Hayvanınızın varsa daha önce veteriner hekim tarafından onaylanan hastalıklarını yazınız."
+                android:inputType="textMultiLine"
+                android:lines="3"
+                android:paddingHorizontal="15dp"
+                android:textSize="12sp"
+                tools:layout_editor_absoluteX="19dp"
+                tools:layout_editor_absoluteY="242dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginTop="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:text="Kullanım Sıklığı:"
+                tools:layout_editor_absoluteX="16dp"
+                tools:layout_editor_absoluteY="384dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <Spinner
+                    android:id="@+id/petBreed3"
+                    android:layout_width="74dp"
+                    android:layout_height="33dp"
+                    android:layout_marginRight="5dp"
+                    android:entries="@array/petType"
+                    android:minHeight="4dp"
+                    android:prompt="@array/petType"
+                    tools:layout_editor_absoluteX="97dp"
+                    tools:layout_editor_absoluteY="428dp" />
+
+                <Spinner
+                    android:id="@+id/petBreed2"
+                    android:layout_width="74dp"
+                    android:layout_height="35dp"
+                    android:entries="@array/petType"
+                    android:minHeight="4dp"
+                    android:prompt="@array/petType"
+                    tools:layout_editor_absoluteX="16dp"
+                    tools:layout_editor_absoluteY="427dp" />
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="27dp"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="İlaç Yan Etkisi Var Mı?"
+                tools:layout_editor_absoluteX="14dp"
+                tools:layout_editor_absoluteY="480dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                tools:layout_editor_absoluteX="154dp"
+                tools:layout_editor_absoluteY="478dp">
+
+                <Button
+                    android:id="@+id/save_button2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_marginHorizontal="15dp"
+                    android:background="@drawable/pet_text_green_bg"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:padding="0dp"
+                    android:text="Evet"
+                    android:textAllCaps="false"
+                    android:textColor="@color/vetBlue"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/save_button4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:background="@drawable/pet_text_green_bg"
+                    android:gravity="center"
+                    android:includeFontPadding="false"
+                    android:padding="0dp"
+                    android:text="Hayır"
+                    android:textAllCaps="false"
+                    android:textColor="@color/vetGreen"
+                    android:textSize="12sp" />
+
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/pet_allergies_edit_text5"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:layout_marginHorizontal="25dp"
+            android:layout_marginVertical="20dp"
+            android:background="@drawable/pet_text_bg"
+            android:hint="Cevabınız evet ise semptom bilgisi giriniz.
+                                Veterinerinize bildirim olarak gönderilecektir."
+            android:inputType="textMultiLine"
+            android:paddingHorizontal="5dp"
+            android:paddingStart="15dp"
+            android:textAlignment="textStart"
+            android:textColorHint="@color/vetGreen"
+            android:textSize="12sp"
+            tools:layout_editor_absoluteY="530dp" />
+
+        <Button
+            android:id="@+id/save_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginEnd="20dp"
+            android:includeFontPadding="false"
+            android:text="Tümünü Kaydet"
+            android:textAllCaps="false"
+            android:textColorHint="@color/vetBlue"
+            android:textSize="12sp"
+
+            />
+
+    </LinearLayout>
+</layout>

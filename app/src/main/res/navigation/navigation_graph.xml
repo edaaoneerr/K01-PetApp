@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/home_menu">
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.edaaoneerr.petcare.view.authview.SignUpFragment"
@@ -53,6 +53,9 @@
         <action
             android:id="@+id/action_home_menu_to_messageFragment"
             app:destination="@id/messageFragment" />
+        <action
+            android:id="@+id/action_home_menu_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/vetListFragment"
@@ -69,7 +72,7 @@
         tools:layout="@layout/fragment_cart" />
     <fragment
         android:id="@+id/pet_menu"
-        android:name="com.edaaoneerr.petcare.view.profileview.ProfileFragment"
+        android:name="com.edaaoneerr.petcare.view.petview.PetFragment"
         android:label="fragment_pet"
         tools:layout="@layout/fragment_pet" />
     <fragment

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="petType">
+        <item>Seçiniz</item>
+        <item>Kedi</item>
+        <item>Köpek</item>
+        <item>Kuş</item>
+        <item>Tavşan</item>
+        <item>Hamster</item>
+        <item>Kaplumbağa</item>
+        <item>Balık</item>
+        <item>Kanarya</item>
+        <item>Kaplumbağa</item>
+        <item>At</item>
+        <item>Arı</item>
+        <item>Sığır</item>
+        <item>Koyun</item>
+        <item>Tavuk</item>
+        <item>İnek</item>
+        <item>Keçi</item>
+        <item>Ördek</item>
+        <item>Kaz</item>
+        <item>Hindi</item>
+    </string-array>
+</resources>

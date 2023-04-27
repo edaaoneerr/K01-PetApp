@@ -1,15 +1,11 @@
 package com.edaaoneerr.petcare.view.authview
 
-import android.content.ContentValues
+import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.activity.result.ActivityResultLauncher
-import androidx.activity.result.IntentSenderRequest
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -21,8 +17,6 @@ import com.edaaoneerr.petcare.view.otpverificationview.OTPVerificationFragment
 import com.edaaoneerr.petcare.viewmodel.AuthenticationResult.*
 import com.edaaoneerr.petcare.viewmodel.LoginViewModel
 import com.edaaoneerr.petcare.viewmodel.OTPVerificationViewModel
-import com.google.android.gms.auth.api.identity.GetPhoneNumberHintIntentRequest
-import com.google.android.gms.auth.api.identity.Identity
 
 
 class LoginFragment : Fragment() {
@@ -37,8 +31,9 @@ class LoginFragment : Fragment() {
     private lateinit var user: Users
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+
         super.onCreate(savedInstanceState)
-        requestHint()
     }
 
     override fun onCreateView(
@@ -52,42 +47,13 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+
+        //requestHint()
         binding.signUpNowCheckedText.setOnClickListener { userWantedToSignIn() }
         binding.loginButton.setOnClickListener { userAuthenticate() }
 
     }
 
-    private fun requestHint() {
-
-        val request: GetPhoneNumberHintIntentRequest =
-            GetPhoneNumberHintIntentRequest.builder().build()
-        val phoneNumberHintIntentResultLauncher: ActivityResultLauncher<IntentSenderRequest> =
-            registerForActivityResult(
-                ActivityResultContracts.StartIntentSenderForResult()
-            ) { result ->
-                try {
-                    val phoneNumber = Identity.getSignInClient(requireActivity())
-                        .getPhoneNumberFromIntent(result.data)
-                    binding.userPhoneNumber.setText(phoneNumber)
-                } catch (e: Exception) {
-                    e.message?.let { message ->
-                        Log.d(ContentValues.TAG, message)
-                    }
-                }
-            }
-        Identity.getSignInClient(requireActivity())
-            .getPhoneNumberHintIntent(request)
-            .addOnSuccessListener {
-                phoneNumberHintIntentResultLauncher.launch(
-                    IntentSenderRequest.Builder(it.intentSender).build()
-                )
-            }
-            .addOnFailureListener {
-                it.message?.let { message ->
-                    Log.d(ContentValues.TAG, message)
-                }
-            }
-    }
 
     private fun userWantedToSignIn() {
         val action = LoginFragmentDirections.actionLoginFragmentToSignUpFragment()
@@ -115,17 +81,20 @@ class LoginFragment : Fragment() {
                 when (authenticationResult) {
                     PHONE_AUTHENTICATED -> {
                         showOTPVerificationDialog(phoneNumber)
-
+                        saveAuthenticationStatus(true)
                     }
                     FULLY_AUTHENTICATED -> {
                         showOTPVerificationDialog(phoneNumber)
+                        saveAuthenticationStatus(true)
 
                     }
                     EMAIL_AUTHENTICATED -> {
                         navigate(binding.root, actionToHomePage)
+                        saveAuthenticationStatus(true)
                     }
                     INVALID_CREDENTIALS -> {
                         Toast.makeText(context, "Yanlış parola.", Toast.LENGTH_LONG).show()
+                        saveAuthenticationStatus(false)
                     }
                     else -> {
                         Toast.makeText(
@@ -133,6 +102,7 @@ class LoginFragment : Fragment() {
                             "Böyle bir kullanıcı bulunamadı.",
                             Toast.LENGTH_LONG
                         ).show()
+                        saveAuthenticationStatus(false)
                     }
                 }
             })
@@ -144,6 +114,12 @@ class LoginFragment : Fragment() {
         val bundle = bundleOf("userPhoneNumber" to phoneNumber)
         otpVerificationFragment.arguments = bundle
         otpVerificationFragment.show(parentFragmentManager, "OTPVerificationFragment")
+    }
+
+    private fun saveAuthenticationStatus(status: Boolean) {
+        val sharedPreferences =
+            this.requireActivity().getSharedPreferences("Authentication", Context.MODE_PRIVATE)
+        sharedPreferences.edit().putBoolean("isAuthenticated", status).apply()
     }
 
     override fun onDestroyView() {

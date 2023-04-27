@@ -1,20 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".view.homepageview.HomePageFragment"
-    android:background="#F8F8F8">
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="vet"
+            type="com.edaaoneerr.petcare.model.Vet" />
+
+        <variable
+            name="service"
+            type="com.edaaoneerr.petcare.model.Service" />
+
+    </data>
 
 
-    <Button
-        android:id="@+id/goToVetListButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="267dp"
-        android:text="VETERİNER LİSTESİNE GİT"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/toolbar_height"
+        android:orientation="vertical"
+        android:paddingHorizontal="30dp"
+        tools:context=".view.homepageview.HomePageFragment">
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:fontFamily="@font/sf_pro_text_bold"
+            android:text="Hoşgeldin, Eda!"
+            android:textColor="@color/black"
+            android:textSize="23sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="58dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/campaignRecyclerView"
+            android:layout_width="359dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp">
+
+
+        </androidx.recyclerview.widget.RecyclerView>
+
+
+        <TextView
+            android:id="@+id/textView8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Servisler" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/serviceListRecyclerView"
+            android:layout_width="367dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/vetText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="En yakın Veterinerler" />
+
+            <TextView
+                android:id="@+id/seeMoreText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="110dp"
+                android:clickable="true"
+                android:text="Daha fazlasını Gör" />
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/nearbyVetRecyclerView"
+            android:layout_width="356dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
+            android:orientation="horizontal" />
+
+
+    </LinearLayout>
+</layout>
