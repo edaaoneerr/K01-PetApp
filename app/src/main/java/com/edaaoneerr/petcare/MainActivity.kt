@@ -1,9 +1,11 @@
 package com.edaaoneerr.petcare
 
+import android.content.Context
 import android.os.Build
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
@@ -13,6 +15,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.onNavDestinationSelected
 import androidx.navigation.ui.setupWithNavController
 import com.edaaoneerr.petcare.databinding.ActivityMainBinding
+import com.edaaoneerr.petcare.viewmodel.LoginViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.navigation.NavigationView
 
@@ -21,16 +24,35 @@ class MainActivity : AppCompatActivity() {
     private var binding: ActivityMainBinding? = null
     private var navController: NavController? = null
 
+    val loginViewModel: LoginViewModel by viewModels()
+    var isLoggedIn = false
+
 
     @RequiresApi(Build.VERSION_CODES.P)
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
 
+        val sharedPreferences =
+            this.getSharedPreferences("Authentication", Context.MODE_PRIVATE)
+
+        isLoggedIn = sharedPreferences.getBoolean("Authentication", false)
+
+
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as? NavHostFragment
         navController = navHostFragment?.navController
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+        if (!isLoggedIn) {
+            /*supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerView, LoginFragment())
+                .commit()*/
+            val navHost =
+                supportFragmentManager.findFragmentById(R.id.fragmentContainerView) as NavHostFragment
+            navHost.navController.navigate(R.id.loginFragment)
+        }
+
 
         navController?.let {
             findViewById<NavigationView>(R.id.navigation_drawer)
@@ -66,11 +88,15 @@ class MainActivity : AppCompatActivity() {
                     navHost.navController.navigate(R.id.home_menu)
 
                 }
-                R.id.services_menu -> {
-                    navHost.navController.navigate(R.id.services_menu)
-                }
                 R.id.cart_menu -> {
                     navHost.navController.navigate(R.id.cart_menu)
+                }
+                R.id.animal_house_menu -> {
+                    navHost.navController.navigate(R.id.animal_house_menu)
+
+                }
+                R.id.shop_menu -> {
+                    navHost.navController.navigate(R.id.shop_menu)
 
                 }
                 R.id.pet_menu -> {
@@ -93,7 +119,7 @@ class MainActivity : AppCompatActivity() {
                     binding?.toolbar?.visibility = View.GONE
                     binding?.bottomNavigation?.visibility = View.VISIBLE
                 }
-                
+
                 else -> {
                     binding?.toolbar?.visibility = View.VISIBLE
                     binding?.bottomNavigation?.visibility = View.VISIBLE

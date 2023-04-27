@@ -127,7 +127,7 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/save_button2"
+                android:id="@+id/addCartButton"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
                 android:layout_marginTop="10dp"

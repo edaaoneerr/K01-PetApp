@@ -44,7 +44,7 @@ class OTPVerificationViewModel : ViewModel() {
                 arrayOf(Manifest.permission.SEND_SMS),
                 1
             )
-            // _sendSMS(phoneNumber)
+            _sendSMS(phoneNumber)
         }
 
     }

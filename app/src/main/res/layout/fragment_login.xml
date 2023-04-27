@@ -34,7 +34,7 @@
                 <EditText
                     android:id="@+id/userEmailAddress"
                     android:layout_width="320dp"
-                    android:layout_height="50dp"
+                    android:layout_height="58dp"
                     android:backgroundTint="@color/background"
                     android:ems="10"
                     android:hint="@string/emailText"
@@ -54,7 +54,7 @@
                 <EditText
                     android:id="@+id/userPassword"
                     android:layout_width="320dp"
-                    android:layout_height="50dp"
+                    android:layout_height="match_parent"
                     android:backgroundTint="@color/background"
                     android:hint="@string/passwordText"
                     android:inputType="textPassword" />
@@ -79,7 +79,7 @@
                 <EditText
                     android:id="@+id/userPhoneNumber"
                     android:layout_width="320dp"
-                    android:layout_height="50dp"
+                    android:layout_height="match_parent"
                     android:backgroundTint="@color/background"
                     android:ems="10"
                     android:hint="@string/phoneNumber"

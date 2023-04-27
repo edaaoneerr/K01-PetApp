@@ -16,7 +16,6 @@ class LoginViewModel(application: Application) : BaseViewModel(application) {
     private val userAPIService = UserAPIService()
     val authenticationResult = MutableLiveData<AuthenticationResult>()
 
-
     fun authenticateUser(user: Users) {
         launch {
             val users = getUsers()

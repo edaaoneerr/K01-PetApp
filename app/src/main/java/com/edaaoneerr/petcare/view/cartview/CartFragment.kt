@@ -7,26 +7,24 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.edaaoneerr.petcare.R
-import com.edaaoneerr.petcare.adapter.ProductListRecyclerAdapter
+import com.edaaoneerr.petcare.adapter.CartRecyclerAdapter
 import com.edaaoneerr.petcare.databinding.FragmentCartBinding
 import com.edaaoneerr.petcare.viewmodel.CartViewModel
-import com.google.android.flexbox.AlignItems
-import com.google.android.flexbox.FlexDirection
-import com.google.android.flexbox.FlexboxLayoutManager
-import com.google.android.flexbox.JustifyContent
+import com.edaaoneerr.petcare.viewmodel.ShopViewModel
 
 
 class CartFragment : Fragment() {
+
+    private var cartRecyclerAdapter = CartRecyclerAdapter(arrayListOf())
+    private val shopViewModel: ShopViewModel by viewModels()
+
+    val cartViewModel: CartViewModel by viewModels()
+
     private lateinit var binding: FragmentCartBinding
-    private val cartViewModel: CartViewModel by viewModels()
-    private var productRecyclerAdapter = ProductListRecyclerAdapter(arrayListOf())
-
     override fun onCreate(savedInstanceState: Bundle?) {
-
-
         super.onCreate(savedInstanceState)
-
 
     }
 
@@ -40,23 +38,24 @@ class CartFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        val layoutManager = FlexboxLayoutManager(context)
-
-        layoutManager.flexDirection = FlexDirection.ROW
-        layoutManager.alignItems = AlignItems.CENTER
-        layoutManager.justifyContent = JustifyContent.FLEX_END
-        binding.productListRecyclerView.layoutManager = layoutManager
-
-        binding.productListRecyclerView.adapter = productRecyclerAdapter
-        this.binding.productListRecyclerView.visibility = View.VISIBLE
-        cartViewModel.getProducts()
-        cartViewModel.products.observe(viewLifecycleOwner) {
-            it?.let {
-                productRecyclerAdapter.updateProductList(it)
+/*
+        for (product in shopViewModel.products.value!!) {
+            if (product.productId.toString() == addedProduct) {
+                cartViewModel.addedProductList.value = arrayListOf(product)
+                cartViewModel.addedProductList.observe(viewLifecycleOwner) {
+                    it?.let {
+                        cartRecyclerAdapter.updateCart(it)
+                    }
+                }
             }
+        }*/
 
-        }
+
+        binding.cartItemRecyclerView.layoutManager = LinearLayoutManager(context)
+        binding.cartItemRecyclerView.adapter = cartRecyclerAdapter
+        this.binding.cartItemRecyclerView.visibility = View.VISIBLE
+
+
     }
 
 }

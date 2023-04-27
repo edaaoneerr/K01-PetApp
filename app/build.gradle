@@ -55,6 +55,7 @@ dependencies {
 
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.6.1'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.1'
+    implementation 'com.github.shuhart:stepview:1.5.1'
     def nav_version = "2.5.3"
     def room_version = '2.5.1'
     def preference_version = "1.2.0"

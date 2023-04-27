@@ -40,13 +40,13 @@
         tools:layout="@layout/fragment_home_page">
         <action
             android:id="@+id/action_homePageFragment_to_cartFragment"
-            app:destination="@id/cart_menu" />
+            app:destination="@id/shop_menu" />
         <action
             android:id="@+id/action_homePageFragment_to_profileFragment"
             app:destination="@id/pet_menu" />
         <action
             android:id="@+id/action_homePageFragment_to_servicesFragment"
-            app:destination="@id/services_menu" />
+            app:destination="@id/cart_menu" />
         <action
             android:id="@+id/action_home_menu_to_notificationFragment"
             app:destination="@id/notificationFragment" />
@@ -63,30 +63,28 @@
     <fragment
         android:id="@+id/vetListFragment"
         android:name="com.edaaoneerr.petcare.view.vetview.VetListFragment"
-        android:label="VetListFragment">
-        <action
-            android:id="@+id/action_vetListFragment_to_servicesListFragment"
-            app:destination="@id/servicesListFragment" />
-    </fragment>
+        android:label="VetListFragment" />
     <fragment
-        android:id="@+id/cart_menu"
-        android:name="com.edaaoneerr.petcare.view.cartview.CartFragment"
-        android:label="fragment_cart"
-        tools:layout="@layout/fragment_cart" />
+        android:id="@+id/shop_menu"
+        android:name="com.edaaoneerr.petcare.view.shopview.ShopFragment"
+        android:label="fragment_shop"
+        tools:layout="@layout/fragment_shop" />
     <fragment
         android:id="@+id/pet_menu"
         android:name="com.edaaoneerr.petcare.view.petview.PetFragment"
         android:label="fragment_pet"
         tools:layout="@layout/fragment_pet" />
     <fragment
-        android:id="@+id/services_menu"
-        android:name="com.edaaoneerr.petcare.view.servicesview.ServicesFragment"
-        android:label="fragment_services"
-        tools:layout="@layout/fragment_services">
-        <action
-            android:id="@+id/action_services_menu_to_servicesListFragment"
-            app:destination="@id/servicesListFragment" />
-    </fragment>
+        android:id="@+id/cart_menu"
+        android:name="com.edaaoneerr.petcare.view.cartview.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart" />
+
+    <fragment
+        android:id="@+id/animal_house_menu"
+        android:name="com.edaaoneerr.petcare.view.animalhouseview.AnimalHouseFragment"
+        android:label="fragment_animal_house"
+        tools:layout="@layout/fragment_animal_house" />
     <fragment
         android:id="@+id/notificationFragment"
         android:name="com.edaaoneerr.petcare.view.notificationview.NotificationFragment"
@@ -96,15 +94,6 @@
         android:id="@+id/messageFragment"
         android:name="com.edaaoneerr.petcare.view.messageview.MessageFragment"
         android:label="MessageFragment" />
-    <fragment
-        android:id="@+id/servicesListFragment"
-        android:name="com.edaaoneerr.petcare.view.servicesview.ServicesListFragment"
-        android:label="fragment_services_list"
-        tools:layout="@layout/fragment_services_list">
-        <action
-            android:id="@+id/action_servicesListFragment_to_vetListFragment"
-            app:destination="@id/vetListFragment" />
-    </fragment>
     <fragment
         android:id="@+id/OTPVerificationFragment"
         android:name="com.edaaoneerr.petcare.view.otpverificationview.OTPVerificationFragment"

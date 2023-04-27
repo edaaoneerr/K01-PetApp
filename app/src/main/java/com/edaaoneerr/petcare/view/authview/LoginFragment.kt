@@ -50,7 +50,9 @@ class LoginFragment : Fragment() {
 
         //requestHint()
         binding.signUpNowCheckedText.setOnClickListener { userWantedToSignIn() }
-        binding.loginButton.setOnClickListener { userAuthenticate() }
+        binding.loginButton.setOnClickListener {
+            userAuthenticate()
+        }
 
     }
 

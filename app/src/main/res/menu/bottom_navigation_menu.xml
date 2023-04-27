@@ -5,12 +5,18 @@
         android:enabled="true"
         android:icon="@drawable/ic_baseline_home_24"
         android:title="Anasayfa" />
-    <item
-        android:id="@+id/services_menu"
-        android:enabled="true"
-        android:icon="@drawable/ic_baseline_medical_services_24"
-        android:title="Servisler" />
 
+    <item
+        android:id="@+id/animal_house_menu"
+        android:enabled="true"
+        android:icon="@drawable/ic_outline_add_business_24"
+        android:title="Barınak" />
+
+    <item
+        android:id="@+id/shop_menu"
+        android:enabled="true"
+        android:icon="@drawable/ic_baseline_shopping_bag_24"
+        android:title="Mağaza" />
     <item
         android:id="@+id/cart_menu"
         android:enabled="true"
@@ -21,5 +27,5 @@
         android:id="@+id/pet_menu"
         android:enabled="true"
         android:icon="@drawable/ic_baseline_pets_24"
-        android:title="Petlerim" />
+        android:title="Dostlarım" />
 </menu>
