@@ -30,8 +30,6 @@ class CampaignRecyclerAdapter(private val campaignList: ArrayList<Campaign>) :
 
     override fun onBindViewHolder(holder: CampaignViewHolder, position: Int) {
         holder.view.campaign = campaignList[position]
-        println("On bind view holder")
-        println(holder.view.campaign)
     }
 
     override fun getItemCount(): Int {

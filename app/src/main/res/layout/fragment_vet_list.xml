@@ -4,67 +4,63 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center"
+        android:layout_marginTop="?attr/actionBarSize"
         android:background="#F8F8F8"
+        android:orientation="vertical"
         tools:context=".view.VetListFragment">
 
-
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/search_bar"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="114dp"
-            android:layout_marginStart="30dp"
-            android:layout_marginEnd="100dp"
-            android:background="@drawable/layout_border"
-            app:layout_constraintBottom_toTopOf="@+id/vetListRecyclerView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_gravity="center">
 
-        </androidx.appcompat.widget.SearchView>
+            <androidx.appcompat.widget.SearchView
+                android:id="@+id/search_bar"
+                android:layout_width="300dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="10dp"
+                android:background="@drawable/layout_border"
+                tools:layout_editor_absoluteX="25dp"
+                tools:layout_editor_absoluteY="3dp" />
+
+
+            <ImageView
+                android:id="@+id/sortIcon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="15dp"
+                android:clickable="true"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_baseline_sort_24"
+                tools:layout_editor_absoluteX="334dp" />
+
+            <ImageView
+                android:id="@+id/filterIcon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+
+                android:layout_gravity="center"
+                android:clickable="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_outline_filter_alt_24" />
+        </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/vetListRecyclerView"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="1dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="5dp"
             android:background="#F8F8F8"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/search_bar" />
-
-        <ImageView
-            android:id="@+id/sortIcon"
-            android:layout_width="25dp"
-            android:clickable="true"
-            android:layout_height="25dp"
-            android:layout_marginStart="300dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
-            app:layout_constraintBottom_toBottomOf="@+id/search_bar"
-            app:layout_constraintEnd_toStartOf="@+id/filterIcon"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/search_bar"
-            app:srcCompat="@drawable/ic_baseline_sort_24" />
-
-        <ImageView
-            android:id="@+id/filterIcon"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginEnd="25dp"
-            android:layout_marginBottom="2dp"
-            android:clickable="true"
-            app:layout_constraintBottom_toBottomOf="@+id/search_bar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/sortIcon"
-            app:layout_constraintTop_toTopOf="@+id/sortIcon"
-            app:layout_constraintVertical_bias="0.0"
-            app:srcCompat="@drawable/ic_outline_filter_alt_24" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            tools:layout_editor_absoluteX="152dp"
+            tools:layout_editor_absoluteY="62dp" />
+    </LinearLayout>
 </layout>

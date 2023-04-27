@@ -3,6 +3,7 @@ package com.edaaoneerr.petcare.viewmodel
 import android.app.Application
 import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
+import com.edaaoneerr.petcare.R
 import com.edaaoneerr.petcare.model.Campaign
 import com.edaaoneerr.petcare.model.Service
 import com.edaaoneerr.petcare.service.AppDatabase
@@ -18,11 +19,21 @@ class HomePageViewModel(application: Application) : BaseViewModel(application) {
 
     val services = MutableLiveData<List<Service>>()
     val campaigns = MutableLiveData<List<Campaign>>()
+    val drawableIconId = MutableLiveData<Int>()
 
+    val iconList = arrayOf(
+        R.drawable.ic_baseline_home_24,
+        R.drawable.ic_baseline_check_circle_24,
+        R.drawable.ic_baseline_access_time_24,
+        R.drawable.ic_baseline_mail_24,
+        R.drawable.ic_baseline_shopping_cart_24,
+        R.drawable.ic_baseline_star_outline_24
+    )
 
     private val serviceAPIService = ServiceAPIService()
     private val campaignAPIService = CampaignAPIService()
     private val disposable = CompositeDisposable()
+
 
     fun getCampaigns() {
         disposable.add(
@@ -83,15 +94,13 @@ class HomePageViewModel(application: Application) : BaseViewModel(application) {
         launch {
             val dao = AppDatabase(getApplication()).serviceDao()
             dao.deleteAllServices()
-            val i = 0
-            for (i in i..serviceList.size) {
-                serviceList.toTypedArray()
-                if (i == serviceList.size - 1)
-                    break
-            }
 
-            dao.insertAllServices(*serviceList.toTypedArray())
-            showServices(serviceList)
+            val servicesWithIcons = serviceList.mapIndexed { index, service ->
+                service.copy(drawableIconId = iconList[index % iconList.size])
+
+            }
+            dao.insertAllServices(*servicesWithIcons.toTypedArray())
+            showServices(servicesWithIcons)
         }
 
 

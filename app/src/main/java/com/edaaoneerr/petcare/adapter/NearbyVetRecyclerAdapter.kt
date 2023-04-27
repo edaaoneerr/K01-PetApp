@@ -30,10 +30,6 @@ class NearbyVetRecyclerAdapter(private val nearbyVetList: ArrayList<Vet>) :
 
     override fun onBindViewHolder(holder: NearbyVetViewHolder, position: Int) {
         holder.view.vet = nearbyVetList[position]
-        println("On bind view holder")
-        println(holder.view.vet)
-        println(nearbyVetList[position])
-
     }
 
     override fun getItemCount(): Int {

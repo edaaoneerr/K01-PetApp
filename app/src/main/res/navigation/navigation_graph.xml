@@ -56,6 +56,9 @@
         <action
             android:id="@+id/action_home_menu_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_home_menu_to_vetListFragment"
+            app:destination="@id/vetListFragment" />
     </fragment>
     <fragment
         android:id="@+id/vetListFragment"

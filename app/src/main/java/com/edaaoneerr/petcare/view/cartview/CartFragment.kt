@@ -7,11 +7,14 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.edaaoneerr.petcare.R
 import com.edaaoneerr.petcare.adapter.ProductListRecyclerAdapter
 import com.edaaoneerr.petcare.databinding.FragmentCartBinding
 import com.edaaoneerr.petcare.viewmodel.CartViewModel
+import com.google.android.flexbox.AlignItems
+import com.google.android.flexbox.FlexDirection
+import com.google.android.flexbox.FlexboxLayoutManager
+import com.google.android.flexbox.JustifyContent
 
 
 class CartFragment : Fragment() {
@@ -38,7 +41,13 @@ class CartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.productListRecyclerView.layoutManager = LinearLayoutManager(context)
+        val layoutManager = FlexboxLayoutManager(context)
+
+        layoutManager.flexDirection = FlexDirection.ROW
+        layoutManager.alignItems = AlignItems.CENTER
+        layoutManager.justifyContent = JustifyContent.FLEX_END
+        binding.productListRecyclerView.layoutManager = layoutManager
+
         binding.productListRecyclerView.adapter = productRecyclerAdapter
         this.binding.productListRecyclerView.visibility = View.VISIBLE
         cartViewModel.getProducts()

@@ -19,11 +19,17 @@ data class Service(
     @SerializedName("service_name")
     val serviceName: String?,
 
-    ) {
+
+    var drawableIconId: Int
+
+
+) {
     constructor(
-        serviceName: String?
+        serviceName: String?,
+        drawableIconId: Int,
     ) : this(
         UUID.randomUUID(),
-        serviceName
+        serviceName,
+        drawableIconId
     )
 }

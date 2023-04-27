@@ -4,12 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.edaaoneerr.petcare.R
 import com.edaaoneerr.petcare.adapter.CampaignRecyclerAdapter
 import com.edaaoneerr.petcare.adapter.NearbyVetRecyclerAdapter
 import com.edaaoneerr.petcare.adapter.ServiceCardRecyclerAdapter
@@ -89,13 +91,28 @@ class HomePageFragment : Fragment() {
 
         }
 
+        vetListViewModel.getVets()
         vetListViewModel.vets.observe(viewLifecycleOwner) {
             it?.let {
                 nearbyVetRecyclerAdapter.updateNearbyVetList(it)
             }
 
         }
+        homePageViewModel.drawableIconId.observe(viewLifecycleOwner) { resourceId ->
+            resourceId?.let {
+                val position =
+                    binding.serviceListRecyclerView.getChildAdapterPosition(view)// or any other way to get the position
+                println(position)
+                binding.serviceListRecyclerView.findViewWithTag<View>(position)
+                    ?.findViewById<ImageView>(R.id.imageView)
+                    ?.setImageResource(resourceId)
+            }
+        }
 
+        binding.seeMoreText.setOnClickListener {
+            val action = HomePageFragmentDirections.actionHomeMenuToVetListFragment()
+            Navigation.findNavController(requireView()).navigate(action)
+        }
 
     }
 

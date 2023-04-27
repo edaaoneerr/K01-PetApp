@@ -30,9 +30,7 @@ class ServiceCardRecyclerAdapter(private val serviceList: ArrayList<Service>) :
 
     override fun onBindViewHolder(holder: ServiceListViewHolder, position: Int) {
         holder.view.service = serviceList[position]
-        println("On bind view holder")
-        println(holder.view.service)
-        println(serviceList[position])
+        holder.view.imageView.tag = position
 
     }
 

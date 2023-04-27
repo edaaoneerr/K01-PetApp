@@ -29,10 +29,6 @@ class VetCardRecyclerAdapter(private val vetList: ArrayList<Vet>) :
 
     override fun onBindViewHolder(holder: VetCardViewHolder, position: Int) {
         holder.view.vet = vetList[position]
-        println("On bind view holder")
-        println(holder.view.vet)
-        println(vetList[position])
-
     }
 
     override fun getItemCount(): Int {
