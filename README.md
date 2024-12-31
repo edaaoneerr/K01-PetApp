@@ -1,8 +1,7 @@
-Evcil Hayvan uygulamasının son çalışan hali: 
+PawMed uygulamasının son çalışan hali: 
 
 
+https://github.com/user-attachments/assets/4362147b-819c-4d74-8c54-d4530739e399
 
 
-
-https://user-images.githubusercontent.com/69804144/235002936-26075aab-c2a3-4f01-8424-4c9d57090c11.mp4
 
